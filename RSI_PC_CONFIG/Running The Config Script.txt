@@ -1,0 +1,8 @@
+Primary method (recommended):
+1. Run setup.bat from the extracted release folder.
+2. Choose "Y" when asked to configure a new PC.
+
+Manual method (if needed):
+1. Launch PowerShell as Administrator.
+2. Navigate to the RSI_PC_CONFIG folder.
+3. Run: powershell -ExecutionPolicy Bypass -File .\config.ps1
