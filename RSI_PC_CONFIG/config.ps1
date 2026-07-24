@@ -26,7 +26,16 @@ $Disk = (Get-WmiObject -Class Win32_DiskDrive).Model
 $OS = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 $ServiceTag = (Get-WmiObject -Class Win32_BIOS).SerialNumber
 $ExpressServiceCode = (Get-WmiObject -Class Win32_ComputerSystemProduct).UUID
-$CurrentMachineName = $env:COMPUTERNAME
+$MacAddress = Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration |
+    Where-Object { $_.IPEnabled -and $_.MACAddress } |
+    Sort-Object -Property @{ Expression = { if ($_.DefaultIPGateway) { 0 } else { 1 } } }, InterfaceIndex |
+    Select-Object -First 1 -ExpandProperty MACAddress
+
+if ([string]::IsNullOrWhiteSpace($MacAddress)) {
+    $MacAddress = "Unavailable"
+} else {
+    $MacAddress = $MacAddress -replace ':', '-'
+}
 
 # Log system info
 Add-Content -Path $LogFile -Value "Computer: $($SystemInfo.Manufacturer) $($SystemInfo.Model)"
@@ -34,14 +43,10 @@ Add-Content -Path $LogFile -Value "Processor: $Processor"
 Add-Content -Path $LogFile -Value "RAM: $RAM GB DDR4"
 Add-Content -Path $LogFile -Value "Disk: $Disk"
 Add-Content -Path $LogFile -Value "Operating System: $OS"
-Add-Content -Path $LogFile -Value "Machine Name: $CurrentMachineName"
 Add-Content -Path $LogFile -Value "Service Tag (ST): $ServiceTag"
 Add-Content -Path $LogFile -Value "Express Service Code: $ExpressServiceCode"
+Add-Content -Path $LogFile -Value "Mac Address: $MacAddress"
 Add-Content -Path $LogFile -Value ""
-
-Add-Content -Path $LogFile -Value "============================="
-Add-Content -Path $LogFile -Value "Hostname"
-Add-Content -Path $LogFile -Value "============================="
 
 # Build a standardized ElementName segment using CamelCase words.
 function Convert-ToElementName {
@@ -91,7 +96,7 @@ function New-StrongPassword {
 $MachineName = Read-Host "Enter new machine name"
 Rename-Computer -NewName $MachineName -Force
 Write-Host "Machine has been renamed to '$MachineName'."
-Add-Content -Path $LogFile -Value "Host Name: $MachineName"
+Add-Content -Path $LogFile -Value "Hostname: $MachineName"
 
 # Define element/account naming standards
 do {

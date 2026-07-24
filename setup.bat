@@ -4,6 +4,8 @@ set "ConfigDir=%Root%RSI_PC_CONFIG"
 set "TeamViewerExe=%ConfigDir%\TVHS.exe"
 set "ConfigScript=%ConfigDir%\config.ps1"
 set "OptimizerScript=%ConfigDir%\optimizer.bat"
+set "ConfigLog=%ConfigDir%\setup_log.txt"
+set "DidConfig=0"
 
 if not exist "%ConfigDir%" (
     echo ERROR: "%ConfigDir%" was not found.
@@ -35,6 +37,7 @@ if /I "%installTV%"=="Y" (
 set /p configPC="Would you like to configure a new PC? (Y/N): "
 if /I "%configPC%"=="Y" (
     if exist "%ConfigScript%" (
+        set "DidConfig=1"
         echo Running PC configuration script as administrator...
         powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'PowerShell' -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%ConfigScript%""' -Verb RunAs"
         echo Please follow the instructions in the PowerShell window to complete PC configuration.
@@ -112,6 +115,9 @@ if /I "%optimizeUser%"=="Y" (
 echo A system restart is required to complete setup.
 set /p restartNow="Would you like to restart now? (Y/N): "
 if /I "%restartNow%"=="Y" (
+    if "%DidConfig%"=="1" (
+        powershell -NoProfile -ExecutionPolicy Bypass -Command "Add-Type -AssemblyName System.Windows.Forms; $logPath = '%ConfigLog%'; $adminPassword = ''; if (Test-Path $logPath) { $raw = Get-Content -Path $logPath -Raw -ErrorAction SilentlyContinue; if ($raw -match 'Admin Account Login[\s\S]*?Password:\s*(.+)') { $adminPassword = $matches[1].Trim() } }; if ([string]::IsNullOrWhiteSpace($adminPassword)) { $msg = 'WARNING: The admin account password was rotated during setup.`r`n`r`nBefore restart, save setup_log.txt to the job documentation folder and record the new admin password.' } else { $msg = 'WARNING: The admin account password was rotated during setup.`r`n`r`nAdmin password: ' + $adminPassword + '`r`n`r`nBefore restart, save setup_log.txt to the job documentation folder and record this password.' }; [System.Windows.Forms.MessageBox]::Show($msg, 'Restart Warning', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning) | Out-Null"
+    )
     echo Restarting system...
     shutdown /r /t 0
 ) else (
