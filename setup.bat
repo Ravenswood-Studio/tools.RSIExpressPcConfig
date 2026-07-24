@@ -4,7 +4,6 @@ set "ConfigDir=%Root%RSI_PC_CONFIG"
 set "TeamViewerExe=%ConfigDir%\TVHS.exe"
 set "ConfigScript=%ConfigDir%\config.ps1"
 set "OptimizerScript=%ConfigDir%\optimizer.bat"
-set "ConfigLog=%ConfigDir%\setup_log.txt"
 set "DidConfig=0"
 
 if not exist "%ConfigDir%" (
@@ -112,15 +111,15 @@ if /I "%optimizeUser%"=="Y" (
 )
 
 :AFTER_OPTIMIZE
-echo A system restart is required to complete setup.
-set /p restartNow="Would you like to restart now? (Y/N): "
-if /I "%restartNow%"=="Y" (
+echo Setup tasks are complete.
+set /p exitNow="Would you like to exit now? (Y/N): "
+if /I "%exitNow%"=="Y" (
     if "%DidConfig%"=="1" (
-        powershell -NoProfile -ExecutionPolicy Bypass -Command "Add-Type -AssemblyName System.Windows.Forms; $logPath = '%ConfigLog%'; $adminPassword = ''; if (Test-Path $logPath) { $raw = Get-Content -Path $logPath -Raw -ErrorAction SilentlyContinue; if ($raw -match 'Admin Account Login[\s\S]*?Password:\s*(.+)') { $adminPassword = $matches[1].Trim() } }; if ([string]::IsNullOrWhiteSpace($adminPassword)) { $msg = 'WARNING: The admin account password was rotated during setup.`r`n`r`nBefore restart, save setup_log.txt to the job documentation folder and record the new admin password.' } else { $msg = 'WARNING: The admin account password was rotated during setup.`r`n`r`nAdmin password: ' + $adminPassword + '`r`n`r`nBefore restart, save setup_log.txt to the job documentation folder and record this password.' }; [System.Windows.Forms.MessageBox]::Show($msg, 'Restart Warning', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning) | Out-Null"
+        powershell -NoProfile -ExecutionPolicy Bypass -Command "Add-Type -AssemblyName System.Windows.Forms; $configDir = '%ConfigDir%'; $logCandidate = Get-ChildItem -Path $configDir -Filter '*_setup_log.txt' -File -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if ($logCandidate) { $logPath = $logCandidate.FullName } else { $logPath = Join-Path $configDir 'setup_log.txt' }; $adminPassword = ''; if (Test-Path $logPath) { $raw = Get-Content -Path $logPath -Raw -ErrorAction SilentlyContinue; if ($raw -match 'Admin Account Login[\s\S]*?Password:\s*(.+)') { $adminPassword = $matches[1].Trim() } }; $nl = [Environment]::NewLine; if ([string]::IsNullOrWhiteSpace($adminPassword)) { $msg = 'WARNING: The admin account password was rotated during setup.' + $nl + $nl + 'Before exit, save the generated config log to the job documentation folder and record the new admin password.' } else { $msg = 'WARNING: The admin account password was rotated during setup.' + $nl + $nl + 'Admin password: ' + $adminPassword + $nl + $nl + 'Before exit, save the generated config log to the job documentation folder and record this password.' }; [System.Windows.Forms.MessageBox]::Show($msg, 'Exit Warning', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning) | Out-Null"
     )
-    echo Restarting system...
-    shutdown /r /t 0
+    echo Exiting setup...
+    exit /b 0
 ) else (
-    echo Please restart your computer manually to complete setup.
+    echo Setup will remain open. Close this window when ready.
     pause
 )

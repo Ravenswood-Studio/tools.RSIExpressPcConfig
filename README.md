@@ -54,7 +54,8 @@ Optional network recovery after install:
 
 ## 2. Download And Prepare
 
-1. Download the latest release ZIP from GitHub.
+1. Download the latest release ZIP from GitHub:
+   https://github.com/Ravenswood-Studio/tools.RSIExpressPcConfig
 2. Extract the ZIP completely.
 3. Open the extracted folder.
 4. Right-click `setup.bat` and select **Run as administrator**.
@@ -73,13 +74,14 @@ When `setup.bat` runs, it prompts for these actions:
      - Admin standard: `Admin-ElementName`
      - User standard: `User-ElementName`
    - Generates strong random passwords for both accounts.
-   - After completion, save the generated config log (`RSI_PC_CONFIG/setup_log.txt`) in the job documentation folder.
+   - After completion, save the generated config log (`RSI_PC_CONFIG/ElementName_setup_log.txt`) in the job documentation folder.
    - Passwords are rotated during setup. If you do not save the config log or record the new admin password, you can lose access to the admin account.
 3. **Optimize a user account**
    - Lists local users.
    - Copies `RSI_PC_CONFIG/optimizer.bat` to the chosen user's Startup folder.
-4. **Restart**
-   - Prompts for immediate restart.
+4. **Exit**
+   - Prompts to exit setup.
+   - If PC configuration was run, shows a warning popup with rotated admin password details before closing.
 
 ## 4. Manual Fallback (If You Need To Run Config Only)
 
@@ -103,6 +105,6 @@ When `setup.bat` runs, it prompts for these actions:
 
 - `config.ps1` configures auto-logon and stores credentials in Windows logon registry settings as part of setup.
 - `config.ps1` also writes a local setup log in the same script folder.
-- Save `RSI_PC_CONFIG/setup_log.txt` in the job documentation folder for each deployment.
+- Save `RSI_PC_CONFIG/ElementName_setup_log.txt` in the job documentation folder for each deployment.
 - The setup process rotates account passwords. Record the rotated admin password immediately to avoid lockout.
 - Treat devices and generated logs as sensitive operational data.

@@ -8,46 +8,6 @@ Write-Host "|   |_|  \_\ |_____/  |_____|   |"
 Write-Host "|      Express Config Tool      |"
 Write-Host "================================="
 
-# Define log file path (same directory as the script)
-$LogFile = "$PSScriptRoot\setup_log.txt"
-
-# Start logging
-Add-Content -Path $LogFile -Value "Auto Generated File By RSI.EXPRESS_CONFIG"
-
-Add-Content -Path $LogFile -Value "============================="
-Add-Content -Path $LogFile -Value "Computer Configuration"
-Add-Content -Path $LogFile -Value "============================="
-
-# Get System Information
-$SystemInfo = Get-WmiObject -Class Win32_ComputerSystem
-$Processor = (Get-WmiObject -Class Win32_Processor).Name
-$RAM = [math]::round($SystemInfo.TotalPhysicalMemory / 1GB, 2)
-$Disk = (Get-WmiObject -Class Win32_DiskDrive).Model
-$OS = (Get-WmiObject -Class Win32_OperatingSystem).Caption
-$ServiceTag = (Get-WmiObject -Class Win32_BIOS).SerialNumber
-$ExpressServiceCode = (Get-WmiObject -Class Win32_ComputerSystemProduct).UUID
-$MacAddress = Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration |
-    Where-Object { $_.IPEnabled -and $_.MACAddress } |
-    Sort-Object -Property @{ Expression = { if ($_.DefaultIPGateway) { 0 } else { 1 } } }, InterfaceIndex |
-    Select-Object -First 1 -ExpandProperty MACAddress
-
-if ([string]::IsNullOrWhiteSpace($MacAddress)) {
-    $MacAddress = "Unavailable"
-} else {
-    $MacAddress = $MacAddress -replace ':', '-'
-}
-
-# Log system info
-Add-Content -Path $LogFile -Value "Computer: $($SystemInfo.Manufacturer) $($SystemInfo.Model)"
-Add-Content -Path $LogFile -Value "Processor: $Processor"
-Add-Content -Path $LogFile -Value "RAM: $RAM GB DDR4"
-Add-Content -Path $LogFile -Value "Disk: $Disk"
-Add-Content -Path $LogFile -Value "Operating System: $OS"
-Add-Content -Path $LogFile -Value "Service Tag (ST): $ServiceTag"
-Add-Content -Path $LogFile -Value "Express Service Code: $ExpressServiceCode"
-Add-Content -Path $LogFile -Value "Mac Address: $MacAddress"
-Add-Content -Path $LogFile -Value ""
-
 # Build a standardized ElementName segment using CamelCase words.
 function Convert-ToElementName {
     param([string]$RawValue)
@@ -92,12 +52,6 @@ function New-StrongPassword {
     -join ($chars | Sort-Object { Get-Random })
 }
 
-# Prompt user for new machine name
-$MachineName = Read-Host "Enter new machine name"
-Rename-Computer -NewName $MachineName -Force
-Write-Host "Machine has been renamed to '$MachineName'."
-Add-Content -Path $LogFile -Value "Hostname: $MachineName"
-
 # Define element/account naming standards
 do {
     $RawElementName = Read-Host "Enter element name for account standard (example: FiberOptics)"
@@ -106,6 +60,52 @@ do {
         Write-Host "Invalid element name. Use letters/numbers only."
     }
 } while ([string]::IsNullOrWhiteSpace($ElementName))
+
+# Define log file path using the standardized element name.
+$LogFile = "$PSScriptRoot\${ElementName}_setup_log.txt"
+
+# Start logging
+Add-Content -Path $LogFile -Value "Auto Generated File By RSI.EXPRESS_CONFIG"
+
+Add-Content -Path $LogFile -Value "============================="
+Add-Content -Path $LogFile -Value "Computer Configuration"
+Add-Content -Path $LogFile -Value "============================="
+
+# Get System Information
+$SystemInfo = Get-WmiObject -Class Win32_ComputerSystem
+$Processor = (Get-WmiObject -Class Win32_Processor).Name
+$RAM = [math]::round($SystemInfo.TotalPhysicalMemory / 1GB, 2)
+$Disk = (Get-WmiObject -Class Win32_DiskDrive).Model
+$OS = (Get-WmiObject -Class Win32_OperatingSystem).Caption
+$ServiceTag = (Get-WmiObject -Class Win32_BIOS).SerialNumber
+$ExpressServiceCode = (Get-WmiObject -Class Win32_ComputerSystemProduct).UUID
+$MacAddress = Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration |
+    Where-Object { $_.IPEnabled -and $_.MACAddress } |
+    Sort-Object -Property @{ Expression = { if ($_.DefaultIPGateway) { 0 } else { 1 } } }, InterfaceIndex |
+    Select-Object -First 1 -ExpandProperty MACAddress
+
+if ([string]::IsNullOrWhiteSpace($MacAddress)) {
+    $MacAddress = "Unavailable"
+} else {
+    $MacAddress = $MacAddress -replace ':', '-'
+}
+
+# Log system info
+Add-Content -Path $LogFile -Value "Computer: $($SystemInfo.Manufacturer) $($SystemInfo.Model)"
+Add-Content -Path $LogFile -Value "Processor: $Processor"
+Add-Content -Path $LogFile -Value "RAM: $RAM GB DDR4"
+Add-Content -Path $LogFile -Value "Disk: $Disk"
+Add-Content -Path $LogFile -Value "Operating System: $OS"
+Add-Content -Path $LogFile -Value "Service Tag (ST): $ServiceTag"
+Add-Content -Path $LogFile -Value "Express Service Code: $ExpressServiceCode"
+Add-Content -Path $LogFile -Value "Mac Address: $MacAddress"
+Add-Content -Path $LogFile -Value ""
+
+# Prompt user for new new Hostname
+$MachineName = Read-Host "Enter new new Hostname"
+Rename-Computer -NewName $MachineName -Force
+Write-Host "Machine has been renamed to '$MachineName'."
+Add-Content -Path $LogFile -Value "Hostname: $MachineName"
 
 $ExpectedAdminUsername = "Admin-$ElementName"
 $Username = "User-$ElementName"
