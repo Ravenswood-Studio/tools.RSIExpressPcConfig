@@ -1,0 +1,347 @@
+---------------------------------------Optimizer Script Log---------------------------------------
+The system cannot find the path specified.
+PowerShell availability confirmed
+Administrator privileges confirmed
+
+Searching for items matching pattern: "C:\ProgramData\Microsoft OneDrive\".
+Iterating files and directories recursively.
+Initiating processing of 3 items from "C:\ProgramData\Microsoft OneDrive\".
+Successfully deleted: C:\ProgramData\Microsoft OneDrive\setup\refcount.ini
+Successfully deleted: C:\ProgramData\Microsoft OneDrive\setup
+Successfully deleted: C:\ProgramData\Microsoft OneDrive\
+Successfully deleted 3 items.
+Searching for items matching pattern: "C:\OneDriveTemp\".
+Iterating files and directories recursively.
+Skipping, no items available.
+--- Disable OneDrive usage
+The operation completed successfully.
+The operation completed successfully.
+--- Disable OneDrive scheduled tasks
+Disabling tasks matching pattern "OneDrive Reporting Task-*".
+Successfully disabled task "OneDrive Reporting Task-S-1-5-21-3363535721-4062341160-3759263973-1003".
+Disabling tasks matching pattern "OneDrive Standalone Update Task-*".
+Successfully disabled task "OneDrive Standalone Update Task-S-1-5-21-3363535721-4062341160-3759263973-1003".
+Disabling tasks matching pattern "OneDrive Per-Machine Standalone Update".
+Skipping, no tasks matching pattern "OneDrive Per-Machine Standalone Update" found, no action needed.
+--- Remove Xbox App
+Remove-AppxPackage : Access is denied.
+Deployment Remove operation with target volume C: on Package Microsoft.GamingApp_2605.900.13.0_x64__8wekyb3d8bbwe
+from:   failed with error 0x80070005. See http://go.microsoft.com/fwlink/?LinkId=235160 for help diagnosing app
+deployment issues.
+At line:1 char:51
++ ... ackage -AllUsers 'Microsoft.GamingApp' | Remove-AppxPackage -AllUsers
++                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Remove-AppxPackage], UnauthorizedAccessException
+    + FullyQualifiedErrorId : System.UnauthorizedAccessException,Microsoft.Windows.Appx.PackageManager.Commands.Remove
+   AppxPackageCommand
+
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.GamingApp_8wekyb3d8bbwe" already exists.
+--- Remove Game Bar
+Remove-AppxPackage : Access is denied.
+Deployment Remove operation with target volume C: on Package
+Microsoft.XboxGamingOverlay_7.325.7221.0_x64__8wekyb3d8bbwe from:   failed with error 0x80070005. See
+http://go.microsoft.com/fwlink/?LinkId=235160 for help diagnosing app deployment issues.
+At line:1 char:59
++ ... AllUsers 'Microsoft.XboxGamingOverlay' | Remove-AppxPackage -AllUsers
++                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Remove-AppxPackage], UnauthorizedAccessException
+    + FullyQualifiedErrorId : System.UnauthorizedAccessException,Microsoft.Windows.Appx.PackageManager.Commands.Remove
+   AppxPackageCommand
+
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxGamingOverlay_8wekyb3d8bbwe" already exists.
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxGameOverlay_8wekyb3d8bbwe" already exists.
+--- Remove outdated Xbox Console Companion
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxApp_8wekyb3d8bbwe" already exists.
+--- Remove Xbox Live in-game experience
+Remove-AppxPackage : Access is denied.
+Deployment Remove operation with target volume C: on Package Microsoft.Xbox.TCUI_1.23.28005.0_x64__8wekyb3d8bbwe from:
+  failed with error 0x80070005. See http://go.microsoft.com/fwlink/?LinkId=235160 for help diagnosing app deployment
+issues.
+At line:1 char:51
++ ... ackage -AllUsers 'Microsoft.Xbox.TCUI' | Remove-AppxPackage -AllUsers
++                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Remove-AppxPackage], UnauthorizedAccessException
+    + FullyQualifiedErrorId : System.UnauthorizedAccessException,Microsoft.Windows.Appx.PackageManager.Commands.Remove
+   AppxPackageCommand
+
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Xbox.TCUI_8wekyb3d8bbwe" already exists.
+--- Remove Xbox Speech To Text Overlay
+Remove-AppxPackage : Access is denied.
+Deployment Remove operation with target volume C: on Package
+Microsoft.XboxSpeechToTextOverlay_1.123.11001.0_x64__8wekyb3d8bbwe from:   failed with error 0x80070005. See
+http://go.microsoft.com/fwlink/?LinkId=235160 for help diagnosing app deployment issues.
+At line:1 char:65
++ ... rs 'Microsoft.XboxSpeechToTextOverlay' | Remove-AppxPackage -AllUsers
++                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Remove-AppxPackage], UnauthorizedAccessException
+    + FullyQualifiedErrorId : System.UnauthorizedAccessException,Microsoft.Windows.Appx.PackageManager.Commands.Remove
+   AppxPackageCommand
+
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe" already exists.
+--- Disable Xbox Live Game Save
+Disabling service: "XblGameSave".
+"XblGameSave" is not running, no need to stop.
+XblGameSave is already disabled, no further action is needed
+--- Disable Xbox Live Networking Service
+Disabling service: "XboxNetApiSvc".
+"XboxNetApiSvc" is not running, no need to stop.
+XboxNetApiSvc is already disabled, no further action is needed
+--- Disable Xbox Live Auth Manager
+Disabling service: "XblAuthManager".
+"XblAuthManager" is not running, no need to stop.
+XblAuthManager is already disabled, no further action is needed
+--- Remove Xbox Identity Provider (breaks Xbox sign-in)
+Remove-AppxPackage : Access is denied.
+Deployment Remove operation with target volume C: on Package
+Microsoft.XboxIdentityProvider_12.130.2510.6003_x64__8wekyb3d8bbwe from:   failed with error 0x80070005. See
+http://go.microsoft.com/fwlink/?LinkId=235160 for help diagnosing app deployment issues.
+At line:1 char:62
++ ... Users 'Microsoft.XboxIdentityProvider' | Remove-AppxPackage -AllUsers
++                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Remove-AppxPackage], UnauthorizedAccessException
+    + FullyQualifiedErrorId : System.UnauthorizedAccessException,Microsoft.Windows.Appx.PackageManager.Commands.Remove
+   AppxPackageCommand
+
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxIdentityProvider_8wekyb3d8bbwe" already exists.
+--- Remove "Xbox Game Callable UI" app (breaks Xbox Live games)
+Searching for items matching pattern: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\*".
+Iterating files and directories recursively.
+Initiating processing of 77 items from "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\*".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\ConnectedStorage\ConnectedStorageHomePage.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\ConnectedStorage\ConflictResolutionPage.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\ConnectedStorage\StopOrKeepSyncingPage.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\ConnectedStorage\LockContentionPage.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\GameProgress\GameProgressStatItem.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Microsoft.Diagnostics.Tracing.EventSource.dll.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\ConnectedStorage\SyncProgressPage.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\ConnectedStorage\SyncFailurePage.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\GameProgress\GameProgressView.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\DebugDashboard\DebugDashboard.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\GamingUI.XboxLive.InternalHelpers.winmd.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit\Images\DfaultProfileImage.png.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\ProgressRing\ProgressRing.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit\Resources\ToolkitStyles.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Resources\Colors_HighContrast.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Assets\SplashScreen.scale-100.png.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Assets\SmallLogo.scale-100.png.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Assets\StoreLogo.scale-100.png.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Assets\WideLogo.scale-100.png.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit\Resources\segxsym.ttf.OLD".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\microsoft.system.package.metadata".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\ChangeRelationshipButton".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit\Resources\Icons.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Resources\Colors_Light.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\ErrorStatePane.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\XboxExperienceServices.dll.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Resources\Colors_Dark.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Assets\Logo.scale-100.png.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\pris\resources.en-US.pri.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit\Shell\Styles.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit\Images\dash.png.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Resources\Resources.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\XBox.TCUI.Resource.dll.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\GamingTcuiHelpers.dll.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\XBox.TCUI.Tracing.dll.OLD".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\ChangeRelationship".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Resources\Styles.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\StyleDictionary.xbf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\XBox.TCUI.Shell.dll.OLD".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\PeopleListView".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Themes\Generic.xbf.OLD".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\TitleAchievement".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\ConnectedStorage".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Fonts\segxsym.ttf.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\AppxSignature.p7x.OLD".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\ProfileHeader".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\ProgressRing".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\GameProgress".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\DebugDashboard".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\AppxBlockMap.xml.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\AppxManifest.xml.OLD".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\ContentTile".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Fonts\Icons.xbf.OLD".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\InviteFriends".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\PeoplePicker".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\XBox.TCUI.exe.OLD".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\resources.pri.OLD".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit\Resources".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\ProfileCard".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit\Controls".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\TitleBar".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\MainPage.xbf.OLD".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\General".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit.dll.OLD".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit\Images".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages\CheckPri".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control\Person".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit\Shell".
+Skipping backup file: "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\App.xbf.OLD".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Resources".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Toolkit".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Control".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Assets".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Themes".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Fonts".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\Pages".
+Skipping folder (not its contents): "C:\WINDOWS\SystemApps\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\pris".
+Successfully processed 0 items and skipped 77 items.
+Searching for items matching pattern: "C:\WINDOWS\XboxGameCallableUI\*".
+Iterating files and directories recursively.
+Skipping, no items available.
+Searching for items matching pattern: "C:\Program Files\WindowsApps\Microsoft.XboxGameCallableUI_*_cw5n1h2txyewy\*".
+Iterating files and directories recursively.
+Skipping, no items available.
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\S-1-5-21-3363535721-4062341160-3759263973-1001\Microsoft.XboxGameCallableUI_cw5n1h2txyewy".
+Remove-AppxPackage : Removal failed. Please contact your software vendor.
+Deployment Remove operation with target volume C: on Package Microsoft.XboxGameCallableUI_1000.25128.1000.0_neutral_neutral_cw5n1h2txyewy from:   failed with error 0x80070032. See
+http://go.microsoft.com/fwlink/?LinkId=235160 for help diagnosing app deployment issues.
+At line:1 char:60
++ ... llUsers 'Microsoft.XboxGameCallableUI' | Remove-AppxPackage -AllUsers
++                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Remove-AppxPackage], COMException
+    + FullyQualifiedErrorId : System.Runtime.InteropServices.COMException,Microsoft.Windows.Appx.PackageManager.Commands.RemoveAppxPackageCommand
+
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxGameCallableUI_cw5n1h2txyewy" already exists.
+Removing registry key at "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\S-1-5-21-3363535721-4062341160-3759263973-1001\Microsoft.XboxGameCallableUI_cw5n1h2txyewy".
+Successfully removed the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\S-1-5-21-3363535721-4062341160-3759263973-1001\Microsoft.XboxGameCallableUI_cw5n1h2txyewy".
+Searching for items matching pattern: "C:\Users\Admin-Bookmark\AppData\Local\Packages\Microsoft.XboxGameCallableUI_cw5n1h2txyewy\*".
+Iterating files and directories recursively.
+Skipping, no items available.
+Searching for items matching pattern: "C:\ProgramData\Microsoft\Windows\AppRepository\Packages\Microsoft.XboxGameCallableUI_*_cw5n1h2txyewy\*".
+Iterating files and directories recursively.
+Initiating processing of 3 items from "C:\ProgramData\Microsoft\Windows\AppRepository\Packages\Microsoft.XboxGameCallableUI_*_cw5n1h2txyewy\*".
+Skipping backup file: "C:\ProgramData\Microsoft\Windows\AppRepository\Packages\Microsoft.XboxGameCallableUI_1000.25128.1000.0_neutral_neutral_cw5n1h2txyewy\ActivationStore.dat.LOG2.OLD".
+Skipping backup file: "C:\ProgramData\Microsoft\Windows\AppRepository\Packages\Microsoft.XboxGameCallableUI_1000.25128.1000.0_neutral_neutral_cw5n1h2txyewy\ActivationStore.dat.LOG1.OLD".
+Skipping backup file: "C:\ProgramData\Microsoft\Windows\AppRepository\Packages\Microsoft.XboxGameCallableUI_1000.25128.1000.0_neutral_neutral_cw5n1h2txyewy\ActivationStore.dat.OLD".
+Successfully processed 0 items and skipped 3 items.
+--- Disable User Data Storage
+Disabling service: "UnistoreSvc".
+"UnistoreSvc" is not running, no need to stop.
+"UnistoreSvc" is already disabled from start, no further action is needed.
+Disabling service: "UnistoreSvc_14a369 UnistoreSvc_39834b UnistoreSvc_6d47e".
+"UnistoreSvc_14a369 UnistoreSvc_39834b UnistoreSvc_6d47e" is not running, no need to stop.
+"HKLM:\SYSTEM\CurrentControlSet\Services\UnistoreSvc_14a369 UnistoreSvc_39834b UnistoreSvc_6d47e" is not found in registry, cannot enable it.
+--- Disable Sync Host
+Disabling service: "OneSyncSvc".
+"OneSyncSvc" is not running, no need to stop.
+"OneSyncSvc" is already disabled from start, no further action is needed.
+Disabling service: "OneSyncSvc_14a369 OneSyncSvc_39834b OneSyncSvc_6d47e".
+"OneSyncSvc_14a369 OneSyncSvc_39834b OneSyncSvc_6d47e" is not running, no need to stop.
+"HKLM:\SYSTEM\CurrentControlSet\Services\OneSyncSvc_14a369 OneSyncSvc_39834b OneSyncSvc_6d47e" is not found in registry, cannot enable it.
+--- Disable Windows Push Notifications
+Disabling service: "WpnService".
+"WpnService" is running, stopping it.
+Stopped "WpnService" successfully.
+Disabled "WpnService" successfully.
+Skipping: Windows (10.0.26200) is above maximum 10.0.18363 (Windows10-1909)
+Skipping: Windows (10.0.26200) is above maximum 10.0.18363 (Windows10-1909)
+--- Disable Messaging Service
+Disabling service: "MessagingService".
+"MessagingService" is not running, no need to stop.
+Successfully disabled the service. It will not start automatically on next boot.
+Disabling service: "MessagingService_14a369 MessagingService_39834b MessagingService_6d47e".
+"MessagingService_14a369 MessagingService_39834b MessagingService_6d47e" is not running, no need to stop.
+"HKLM:\SYSTEM\CurrentControlSet\Services\MessagingService_14a369 MessagingService_39834b MessagingService_6d47e" is not found in registry, cannot enable it.
+--- Remove insecure "Print 3D" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Print3D_8wekyb3d8bbwe".
+Searching for items matching pattern: "C:\WINDOWS\SystemApps\Windows.Print3D_cw5n1h2txyewy\*".
+Iterating files and directories recursively.
+Skipping, no items available.
+Searching for items matching pattern: "C:\WINDOWS\Print3D\*".
+Iterating files and directories recursively.
+Skipping, no items available.
+Searching for items matching pattern: "C:\Program Files\WindowsApps\Windows.Print3D_*_cw5n1h2txyewy\*".
+Iterating files and directories recursively.
+Skipping, no items available.
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\S-1-5-21-3363535721-4062341160-3759263973-1001\Windows.Print3D_cw5n1h2txyewy".
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Windows.Print3D_cw5n1h2txyewy".
+Removing registry key at "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\S-1-5-21-3363535721-4062341160-3759263973-1001\Windows.Print3D_cw5n1h2txyewy".
+Successfully removed the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\S-1-5-21-3363535721-4062341160-3759263973-1001\Windows.Print3D_cw5n1h2txyewy".
+Searching for items matching pattern: "C:\Users\Admin-Bookmark\AppData\Local\Packages\Windows.Print3D_cw5n1h2txyewy\*".
+Iterating files and directories recursively.
+Skipping, no items available.
+Searching for items matching pattern: "C:\ProgramData\Microsoft\Windows\AppRepository\Packages\Windows.Print3D_*_cw5n1h2txyewy\*".
+Iterating files and directories recursively.
+Skipping, no items available.
+--- Remove "Microsoft 3D Builder" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.3DBuilder_8wekyb3d8bbwe".
+--- Remove "3D Viewer" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Microsoft3DViewer_8wekyb3d8bbwe".
+--- Remove "MSN Weather" app
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.BingWeather_8wekyb3d8bbwe" already exists.
+--- Remove "MSN Sports" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.BingSports_8wekyb3d8bbwe".
+--- Remove "Microsoft News" app
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.BingNews_8wekyb3d8bbwe" already exists.
+--- Remove "MSN Money" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.BingFinance_8wekyb3d8bbwe".
+--- Remove "Microsoft 365 (Office)" app
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe" already exists.
+--- Remove "OneNote" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Office.OneNote_8wekyb3d8bbwe".
+--- Remove "Sway" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Office.Sway_8wekyb3d8bbwe".
+--- Remove "Phone Companion" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.WindowsPhone_8wekyb3d8bbwe".
+--- Remove "Microsoft Phone" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.CommsPhone_8wekyb3d8bbwe".
+--- Remove "Phone Link" app
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.YourPhone_8wekyb3d8bbwe" already exists.
+--- Remove "Call" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\S-1-5-21-3363535721-4062341160-3759263973-1001\Microsoft.Windows.CallingShellApp_cw5n1h2txyewy".
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Windows.CallingShellApp_cw5n1h2txyewy".
+Removing registry key at "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\S-1-5-21-3363535721-4062341160-3759263973-1001\Microsoft.Windows.CallingShellApp_cw5n1h2txyewy".
+Successfully removed the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\S-1-5-21-3363535721-4062341160-3759263973-1001\Microsoft.Windows.CallingShellApp_cw5n1h2txyewy".
+--- Remove "Candy Crush Saga" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\king.com.CandyCrushSaga_kgqvnymyfvs32".
+--- Remove "Candy Crush Soda Saga" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\king.com.CandyCrushSodaSaga_kgqvnymyfvs32".
+--- Remove "Shazam" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\ShazamEntertainmentLtd.Shazam_pqbynwjfrbcg4".
+--- Remove "Flipboard" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Flipboard.Flipboard_3f5azkryzdbc4".
+--- Remove "Twitter" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\9E2F88E3.Twitter_wgeqdkkx372wm".
+--- Remove "iHeart: Radio, Music, Podcasts" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\ClearChannelRadioDigital.iHeartRadio_a76a11dkgb644".
+--- Remove "Duolingo - Language Lessons" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\D5EA27B7.Duolingo-LearnLanguagesforFree_yx6k7tf7xvsea".
+--- Remove "Adobe Photoshop Express" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\AdobeSystemsIncorporated.AdobePhotoshopExpress_ynb6jyjzte8ga".
+--- Remove "Pandora" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\PandoraMediaInc.29680B314EFC2_n619g4d5j0fnw".
+--- Remove "Eclipse Manager" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\46928bounde.EclipseManager_a5h4egax66k6y".
+--- Remove "Code Writer" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\ActiproSoftwareLLC.562882FEEB491_24pqs290vpjk0".
+--- Remove "Spotify - Music and Podcasts" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\SpotifyAB.SpotifyMusic_zpdnekdrzrea0".
+--- Remove "Cortana" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.549981C3F5F10_8wekyb3d8bbwe".
+--- Remove "Microsoft Tips" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Getstarted_8wekyb3d8bbwe".
+--- Remove "Microsoft Messaging" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Messaging_8wekyb3d8bbwe".
+--- Remove "Mixed Reality Portal" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.MixedReality.Portal_8wekyb3d8bbwe".
+--- Remove "Windows Alarms and Clock" app
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.WindowsAlarms_8wekyb3d8bbwe" already exists.
+--- Remove "Paint 3D" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.MSPaint_8wekyb3d8bbwe".
+--- Remove "Windows Maps" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.WindowsMaps_8wekyb3d8bbwe".
+--- Remove "Minecraft for Windows" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.MinecraftUWP_8wekyb3d8bbwe".
+--- Remove "Microsoft People" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.People_8wekyb3d8bbwe".
+--- Remove "Microsoft Pay" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Wallet_8wekyb3d8bbwe".
+--- Remove "Mobile Plans" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.OneConnect_8wekyb3d8bbwe".
+--- Remove "Microsoft Solitaire Collection" app
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe" already exists.
+--- Remove "Microsoft Sticky Notes" app
+Skipping, no action needed, registry path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe" already exists.
+--- Remove "Mail and Calendar" app
+Successfully created the registry key at path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\microsoft.windowscommunicationsapps_8wekyb3d8bbwe".
+--- Remove "Movies ^& TV" app

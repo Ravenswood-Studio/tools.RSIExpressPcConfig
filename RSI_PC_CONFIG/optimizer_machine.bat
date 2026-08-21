@@ -54,9 +54,8 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$taskPathPattern='\'; $taskNa
 :: ---------------------Remove Xbox App----------------------
 :: ----------------------------------------------------------
 echo --- Remove Xbox App 
-:: Uninstall 'Microsoft.GamingApp' Store app
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage -AllUsers 'Microsoft.GamingApp' | Remove-AppxPackage -AllUsers"
 :: Mark 'Microsoft.GamingApp' as deprovisioned to block reinstall during Windows updates.
+:: (Remove-AppxPackage skipped: Windows denies removal of this package even as Administrator)
 :: Create "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.GamingApp_8wekyb3d8bbwe" registry key
 PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.GamingApp_8wekyb3d8bbwe'; $registryHive = $keyPath.Split('\')[0]; $registryPath = "^""$($registryHive):$($keyPath.Substring($registryHive.Length))"^""; if (Test-Path $registryPath) { Write-Host "^""Skipping, no action needed, registry path `"^""$registryPath`"^"" already exists."^""; exit 0; }; try { New-Item -Path $registryPath -Force -ErrorAction Stop | Out-Null; Write-Host "^""Successfully created the registry key at path `"^""$registryPath`"^""."^""; } catch { Write-Error "^""Failed to create the registry key at path `"^""$registryPath`"^"": $($_.Exception.Message)"^""; }"
 :: ----------------------------------------------------------
@@ -66,14 +65,12 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Micro
 :: ---------------------Remove Game Bar----------------------
 :: ----------------------------------------------------------
 echo --- Remove Game Bar 
-:: Uninstall 'Microsoft.XboxGamingOverlay' Store app
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage -AllUsers 'Microsoft.XboxGamingOverlay' | Remove-AppxPackage -AllUsers"
 :: Mark 'Microsoft.XboxGamingOverlay' as deprovisioned to block reinstall during Windows updates.
+:: (Remove-AppxPackage skipped: Windows denies removal of this package even as Administrator)
 :: Create "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxGamingOverlay_8wekyb3d8bbwe" registry key
 PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxGamingOverlay_8wekyb3d8bbwe'; $registryHive = $keyPath.Split('\')[0]; $registryPath = "^""$($registryHive):$($keyPath.Substring($registryHive.Length))"^""; if (Test-Path $registryPath) { Write-Host "^""Skipping, no action needed, registry path `"^""$registryPath`"^"" already exists."^""; exit 0; }; try { New-Item -Path $registryPath -Force -ErrorAction Stop | Out-Null; Write-Host "^""Successfully created the registry key at path `"^""$registryPath`"^""."^""; } catch { Write-Error "^""Failed to create the registry key at path `"^""$registryPath`"^"": $($_.Exception.Message)"^""; }"
-:: Uninstall 'Microsoft.XboxGameOverlay' Store app
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage -AllUsers 'Microsoft.XboxGameOverlay' | Remove-AppxPackage -AllUsers"
 :: Mark 'Microsoft.XboxGameOverlay' as deprovisioned to block reinstall during Windows updates.
+:: (Remove-AppxPackage skipped: Windows denies removal of this package even as Administrator)
 :: Create "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxGameOverlay_8wekyb3d8bbwe" registry key
 PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxGameOverlay_8wekyb3d8bbwe'; $registryHive = $keyPath.Split('\')[0]; $registryPath = "^""$($registryHive):$($keyPath.Substring($registryHive.Length))"^""; if (Test-Path $registryPath) { Write-Host "^""Skipping, no action needed, registry path `"^""$registryPath`"^"" already exists."^""; exit 0; }; try { New-Item -Path $registryPath -Force -ErrorAction Stop | Out-Null; Write-Host "^""Successfully created the registry key at path `"^""$registryPath`"^""."^""; } catch { Write-Error "^""Failed to create the registry key at path `"^""$registryPath`"^"": $($_.Exception.Message)"^""; }"
 :: ----------------------------------------------------------
@@ -83,9 +80,8 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Micro
 :: ----------Remove outdated Xbox Console Companion----------
 :: ----------------------------------------------------------
 echo --- Remove outdated Xbox Console Companion 
-:: Uninstall 'Microsoft.XboxApp' Store app
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage -AllUsers 'Microsoft.XboxApp' | Remove-AppxPackage -AllUsers"
 :: Mark 'Microsoft.XboxApp' as deprovisioned to block reinstall during Windows updates.
+:: (Remove-AppxPackage skipped: Windows denies removal of this package even as Administrator)
 :: Create "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxApp_8wekyb3d8bbwe" registry key
 PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxApp_8wekyb3d8bbwe'; $registryHive = $keyPath.Split('\')[0]; $registryPath = "^""$($registryHive):$($keyPath.Substring($registryHive.Length))"^""; if (Test-Path $registryPath) { Write-Host "^""Skipping, no action needed, registry path `"^""$registryPath`"^"" already exists."^""; exit 0; }; try { New-Item -Path $registryPath -Force -ErrorAction Stop | Out-Null; Write-Host "^""Successfully created the registry key at path `"^""$registryPath`"^""."^""; } catch { Write-Error "^""Failed to create the registry key at path `"^""$registryPath`"^"": $($_.Exception.Message)"^""; }"
 :: ----------------------------------------------------------
@@ -95,9 +91,8 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Micro
 :: -----------Remove Xbox Live in-game experience------------
 :: ----------------------------------------------------------
 echo --- Remove Xbox Live in-game experience 
-:: Uninstall 'Microsoft.Xbox.TCUI' Store app
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage -AllUsers 'Microsoft.Xbox.TCUI' | Remove-AppxPackage -AllUsers"
 :: Mark 'Microsoft.Xbox.TCUI' as deprovisioned to block reinstall during Windows updates.
+:: (Remove-AppxPackage skipped: Windows denies removal of this package even as Administrator)
 :: Create "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Xbox.TCUI_8wekyb3d8bbwe" registry key
 PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Xbox.TCUI_8wekyb3d8bbwe'; $registryHive = $keyPath.Split('\')[0]; $registryPath = "^""$($registryHive):$($keyPath.Substring($registryHive.Length))"^""; if (Test-Path $registryPath) { Write-Host "^""Skipping, no action needed, registry path `"^""$registryPath`"^"" already exists."^""; exit 0; }; try { New-Item -Path $registryPath -Force -ErrorAction Stop | Out-Null; Write-Host "^""Successfully created the registry key at path `"^""$registryPath`"^""."^""; } catch { Write-Error "^""Failed to create the registry key at path `"^""$registryPath`"^"": $($_.Exception.Message)"^""; }"
 :: ----------------------------------------------------------
@@ -107,9 +102,8 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Micro
 :: ------------Remove Xbox Speech To Text Overlay------------
 :: ----------------------------------------------------------
 echo --- Remove Xbox Speech To Text Overlay 
-:: Uninstall 'Microsoft.XboxSpeechToTextOverlay' Store app
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage -AllUsers 'Microsoft.XboxSpeechToTextOverlay' | Remove-AppxPackage -AllUsers"
 :: Mark 'Microsoft.XboxSpeechToTextOverlay' as deprovisioned to block reinstall during Windows updates.
+:: (Remove-AppxPackage skipped: Windows denies removal of this package even as Administrator)
 :: Create "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe" registry key
 PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe'; $registryHive = $keyPath.Split('\')[0]; $registryPath = "^""$($registryHive):$($keyPath.Substring($registryHive.Length))"^""; if (Test-Path $registryPath) { Write-Host "^""Skipping, no action needed, registry path `"^""$registryPath`"^"" already exists."^""; exit 0; }; try { New-Item -Path $registryPath -Force -ErrorAction Stop | Out-Null; Write-Host "^""Successfully created the registry key at path `"^""$registryPath`"^""."^""; } catch { Write-Error "^""Failed to create the registry key at path `"^""$registryPath`"^"": $($_.Exception.Message)"^""; }"
 :: ----------------------------------------------------------
@@ -146,9 +140,8 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$serviceName = 'XblAuthManage
 :: ---Remove Xbox Identity Provider (breaks Xbox sign-in)----
 :: ----------------------------------------------------------
 echo --- Remove Xbox Identity Provider (breaks Xbox sign-in) 
-:: Uninstall 'Microsoft.XboxIdentityProvider' Store app
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage -AllUsers 'Microsoft.XboxIdentityProvider' | Remove-AppxPackage -AllUsers"
 :: Mark 'Microsoft.XboxIdentityProvider' as deprovisioned to block reinstall during Windows updates.
+:: (Remove-AppxPackage skipped: Windows denies removal of this package even as Administrator)
 :: Create "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxIdentityProvider_8wekyb3d8bbwe" registry key
 PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxIdentityProvider_8wekyb3d8bbwe'; $registryHive = $keyPath.Split('\')[0]; $registryPath = "^""$($registryHive):$($keyPath.Substring($registryHive.Length))"^""; if (Test-Path $registryPath) { Write-Host "^""Skipping, no action needed, registry path `"^""$registryPath`"^"" already exists."^""; exit 0; }; try { New-Item -Path $registryPath -Force -ErrorAction Stop | Out-Null; Write-Host "^""Successfully created the registry key at path `"^""$registryPath`"^""."^""; } catch { Write-Error "^""Failed to create the registry key at path `"^""$registryPath`"^"": $($_.Exception.Message)"^""; }"
 :: ----------------------------------------------------------
@@ -165,9 +158,8 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$pathGlobPattern = "^""%SYSTE
 :: Enable removal of system app 'Microsoft.XboxGameCallableUI' by marking it as "EndOfLife"
 :: Create "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\$CURRENT_USER_SID\Microsoft.XboxGameCallableUI_cw5n1h2txyewy" registry key
 PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\$CURRENT_USER_SID\Microsoft.XboxGameCallableUI_cw5n1h2txyewy'; $registryHive = $keyPath.Split('\')[0]; $registryPath = "^""$($registryHive):$($keyPath.Substring($registryHive.Length))"^""; $userSid = (New-Object System.Security.Principal.NTAccount($env:USERNAME)).Translate([Security.Principal.SecurityIdentifier]).Value; $registryPath = $registryPath.Replace('$CURRENT_USER_SID', $userSid); if (Test-Path $registryPath) { Write-Host "^""Skipping, no action needed, registry path `"^""$registryPath`"^"" already exists."^""; exit 0; }; try { New-Item -Path $registryPath -Force -ErrorAction Stop | Out-Null; Write-Host "^""Successfully created the registry key at path `"^""$registryPath`"^""."^""; } catch { Write-Error "^""Failed to create the registry key at path `"^""$registryPath`"^"": $($_.Exception.Message)"^""; }"
-:: Uninstall 'Microsoft.XboxGameCallableUI' Store app
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage -AllUsers 'Microsoft.XboxGameCallableUI' | Remove-AppxPackage -AllUsers"
 :: Mark 'Microsoft.XboxGameCallableUI' as deprovisioned to block reinstall during Windows updates.
+:: (Remove-AppxPackage skipped: Windows denies removal of this package even as Administrator)
 :: Create "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxGameCallableUI_cw5n1h2txyewy" registry key
 PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.XboxGameCallableUI_cw5n1h2txyewy'; $registryHive = $keyPath.Split('\')[0]; $registryPath = "^""$($registryHive):$($keyPath.Substring($registryHive.Length))"^""; if (Test-Path $registryPath) { Write-Host "^""Skipping, no action needed, registry path `"^""$registryPath`"^"" already exists."^""; exit 0; }; try { New-Item -Path $registryPath -Force -ErrorAction Stop | Out-Null; Write-Host "^""Successfully created the registry key at path `"^""$registryPath`"^""."^""; } catch { Write-Error "^""Failed to create the registry key at path `"^""$registryPath`"^"": $($_.Exception.Message)"^""; }"
 :: Remove the registry key "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\EndOfLife\$CURRENT_USER_SID\Microsoft.XboxGameCallableUI_cw5n1h2txyewy" (Revert 'Microsoft.XboxGameCallableUI' to its default, non-removable state.)
