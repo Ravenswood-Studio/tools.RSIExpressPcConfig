@@ -87,20 +87,13 @@ if /I "%optimizeMachine%"=="Y" (
     echo Machine optimization complete.
 
     rem New user profiles are cloned from the Default profile, so this seeds Startup for every future user
+    rem Writing under C:\Users\Default requires admin rights, so this runs elevated rather than in this shell
     set "defaultStartupFolder=C:\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 
-    if not exist "%defaultStartupFolder%" (
-        echo Startup folder for the Default profile not found. Creating it now...
-        mkdir "%defaultStartupFolder%" 2>nul
-        if errorlevel 1 (
-            echo ERROR: Could not create "%defaultStartupFolder%". Make sure you have permissions.
-            goto :AFTER_OPTIMIZE
-        )
-    )
-
-    copy "%OptimizerUserScript%" "%defaultStartupFolder%\" /Y
+    echo Placing optimizer_user.bat in the Default profile's Startup folder (elevated)...
+    powershell -NoProfile -ExecutionPolicy Bypass -Command "$p = Start-Process -FilePath 'PowerShell' -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"if (-not (Test-Path -LiteralPath ''%defaultStartupFolder%'')) { New-Item -ItemType Directory -Path ''%defaultStartupFolder%'' -Force | Out-Null }; Copy-Item -LiteralPath ''%OptimizerUserScript%'' -Destination ''%defaultStartupFolder%'' -Force\"' -Verb RunAs -Wait -PassThru; exit $p.ExitCode"
     if errorlevel 1 (
-        echo ERROR: Failed to copy optimizer_user.bat into "%defaultStartupFolder%".
+        echo ERROR: Failed to set up "%defaultStartupFolder%" with optimizer_user.bat. Make sure you have permissions.
     ) else (
         echo optimizer_user.bat has been placed in the Default profile's Startup folder.
         echo It will run with no prompt for each new user at their first login.
