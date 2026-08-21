@@ -803,5 +803,29 @@ PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage -AllUsers 'Mi
 PowerShell -ExecutionPolicy Unrestricted -Command "$keyPath='HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Todos_8wekyb3d8bbwe'; $registryHive = $keyPath.Split('\')[0]; $registryPath = "^""$($registryHive):$($keyPath.Substring($registryHive.Length))"^""; if (Test-Path $registryPath) { Write-Host "^""Skipping, no action needed, registry path `"^""$registryPath`"^"" already exists."^""; exit 0; }; try { New-Item -Path $registryPath -Force -ErrorAction Stop | Out-Null; Write-Host "^""Successfully created the registry key at path `"^""$registryPath`"^""."^""; } catch { Write-Error "^""Failed to create the registry key at path `"^""$registryPath`"^"": $($_.Exception.Message)"^""; }"
 :: ----------------------------------------------------------
 
+
+:: ----------------------------------------------------------
+:: -----Seed optimizer_user.bat into Default profile's Startup folder-----
+:: ----------------------------------------------------------
+echo --- Seed optimizer_user.bat into Default profile's Startup folder
+:: New user profiles are cloned from the Default profile, so this seeds Startup for every future user.
+:: This script already runs elevated, so plain mkdir/copy have the permissions this needs.
+set "DefaultStartupFolder=C:\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+set "OptimizerUserScript=%~dp0optimizer_user.bat"
+if not exist "%DefaultStartupFolder%" (
+    mkdir "%DefaultStartupFolder%"
+)
+if not exist "%DefaultStartupFolder%" (
+    echo ERROR: Could not create "%DefaultStartupFolder%".
+) else (
+    copy /Y "%OptimizerUserScript%" "%DefaultStartupFolder%\" >nul
+    if errorlevel 1 (
+        echo ERROR: Failed to copy optimizer_user.bat into "%DefaultStartupFolder%".
+    ) else (
+        echo optimizer_user.bat has been placed in the Default profile's Startup folder.
+    )
+)
+:: ----------------------------------------------------------
+
 endlocal
 exit /b 0

@@ -85,19 +85,6 @@ if /I "%optimizeMachine%"=="Y" (
     echo Running optimizer_machine.bat as administrator...
     powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'cmd' -ArgumentList '/c \"%OptimizerMachineScript%\"' -Verb RunAs -Wait"
     echo Machine optimization complete.
-
-    rem New user profiles are cloned from the Default profile, so this seeds Startup for every future user
-    rem Writing under C:\Users\Default requires admin rights, so this runs elevated rather than in this shell
-    set "defaultStartupFolder=C:\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
-
-    echo Placing optimizer_user.bat in the Default profile's Startup folder (elevated)...
-    powershell -NoProfile -ExecutionPolicy Bypass -Command "$p = Start-Process -FilePath 'PowerShell' -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"if (-not (Test-Path -LiteralPath ''%defaultStartupFolder%'')) { New-Item -ItemType Directory -Path ''%defaultStartupFolder%'' -Force | Out-Null }; Copy-Item -LiteralPath ''%OptimizerUserScript%'' -Destination ''%defaultStartupFolder%'' -Force\"' -Verb RunAs -Wait -PassThru; exit $p.ExitCode"
-    if errorlevel 1 (
-        echo ERROR: Failed to set up "%defaultStartupFolder%" with optimizer_user.bat. Make sure you have permissions.
-    ) else (
-        echo optimizer_user.bat has been placed in the Default profile's Startup folder.
-        echo It will run with no prompt for each new user at their first login.
-    )
 ) else (
     echo Skipping machine optimization.
 )
