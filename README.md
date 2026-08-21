@@ -53,7 +53,6 @@ Optional network recovery after install:
 3. Run:
    `ipconfig /renew`
 
-
 ## 2. Download And Prepare
 
 1. Download the latest release ZIP from GitHub:
@@ -65,6 +64,8 @@ Optional network recovery after install:
 > Important: Do not run from inside the ZIP preview. Extract first.
 
 ## 3. Run The Utility (setup.bat)
+
+> Before running the utility, remove any unnecessary USB devices. Extra or unused USB hardware can interfere with automatic hardware scans during setup.
 
 When `setup.bat` runs, it prompts for these actions:
 
