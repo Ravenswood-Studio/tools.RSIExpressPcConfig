@@ -3,7 +3,8 @@ set "Root=%~dp0"
 set "ConfigDir=%Root%RSI_PC_CONFIG"
 set "TeamViewerExe=%ConfigDir%\TeamViewer_Host_Setup_x64.exe"
 set "ConfigScript=%ConfigDir%\config.ps1"
-set "OptimizerScript=%ConfigDir%\optimizer.bat"
+set "OptimizerMachineScript=%ConfigDir%\optimizer_machine.bat"
+set "OptimizerUserScript=%ConfigDir%\optimizer_user.bat"
 set "SshScript=%ConfigDir%\setup_ssh.ps1"
 set "DidConfig=0"
 
@@ -66,64 +67,46 @@ if /I "%configPC%"=="Y" (
     echo Skipping PC configuration.
 )
 
-set /p optimizeUser="Would you like to optimize a user account? (Y/N): "
-if /I "%optimizeUser%"=="Y" (
-    if not exist "%OptimizerScript%" (
-        echo optimizer.bat was not found at:
-        echo %OptimizerScript%
-        echo Skipping user account optimization.
+set /p optimizeMachine="Would you like to optimize this machine? (Y/N): "
+if /I "%optimizeMachine%"=="Y" (
+    if not exist "%OptimizerMachineScript%" (
+        echo optimizer_machine.bat was not found at:
+        echo %OptimizerMachineScript%
+        echo Skipping machine optimization.
+        goto :AFTER_OPTIMIZE
+    )
+    if not exist "%OptimizerUserScript%" (
+        echo optimizer_user.bat was not found at:
+        echo %OptimizerUserScript%
+        echo Skipping machine optimization.
         goto :AFTER_OPTIMIZE
     )
 
-    setlocal enabledelayedexpansion
-    echo Listing user accounts...
-    set /a idx=0
-    for /f "usebackq delims=" %%u in (`powershell -NoProfile -Command "Get-LocalUser ^| Select-Object -ExpandProperty Name"`) do (
-        set /a idx+=1
-        set "user[!idx!]=%%u"
-        echo !idx!. %%u
-    )
+    echo Running optimizer_machine.bat as administrator...
+    powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'cmd' -ArgumentList '/c \"%OptimizerMachineScript%\"' -Verb RunAs -Wait"
+    echo Machine optimization complete.
 
-    if !idx! EQU 0 (
-        endlocal
-        echo ERROR: No local users were found. Skipping user account optimization.
-        goto :AFTER_OPTIMIZE
-    )
+    rem New user profiles are cloned from the Default profile, so this seeds Startup for every future user
+    set "defaultStartupFolder=C:\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 
-    set /p userChoice="Enter the number of the user to optimize: "
-
-    set "chosenUser=!user[%userChoice%]!"
-    if not defined chosenUser (
-        endlocal
-        echo ERROR: Invalid selection. Skipping user account optimization.
-        goto :AFTER_OPTIMIZE
-    )
-    for %%N in ("!chosenUser!") do endlocal & set "chosenUser=%%~N"
-
-    rem Copy optimizer.bat to the selected user's Startup folder for one-time execution
-    set "startupFolder=C:\Users\%chosenUser%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
-
-    if exist "%startupFolder%" (
-        echo Startup folder exists for %chosenUser%.
-    ) else (
-        echo Startup folder for %chosenUser% not found. Creating it now...
-        mkdir "%startupFolder%" 2>nul
+    if not exist "%defaultStartupFolder%" (
+        echo Startup folder for the Default profile not found. Creating it now...
+        mkdir "%defaultStartupFolder%" 2>nul
         if errorlevel 1 (
-            echo ERROR: Could not create "%startupFolder%". Make sure the profile path is correct and you have permissions.
+            echo ERROR: Could not create "%defaultStartupFolder%". Make sure you have permissions.
             goto :AFTER_OPTIMIZE
-        ) else (
-            echo Created "%startupFolder%".
         )
     )
 
-    copy "%OptimizerScript%" "%startupFolder%\" /Y
+    copy "%OptimizerUserScript%" "%defaultStartupFolder%\" /Y
     if errorlevel 1 (
-        echo ERROR: Failed to copy optimizer.bat into "%startupFolder%".
+        echo ERROR: Failed to copy optimizer_user.bat into "%defaultStartupFolder%".
     ) else (
-        echo Optimizer has been placed in the Startup folder for %chosenUser%. It will run at next login.
+        echo optimizer_user.bat has been placed in the Default profile's Startup folder.
+        echo It will run with no prompt for each new user at their first login.
     )
 ) else (
-    echo Skipping user account optimization.
+    echo Skipping machine optimization.
 )
 
 :AFTER_OPTIMIZE

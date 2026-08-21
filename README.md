@@ -6,7 +6,8 @@ This utility helps with new Windows PC setup using one entry point: `setup.bat`.
 
 - `setup.bat` - Main launcher for the setup workflow.
 - `RSI_PC_CONFIG/config.ps1` - New PC configuration script.
-- `RSI_PC_CONFIG/optimizer.bat` - User optimization script (runs at next login for selected user).
+- `RSI_PC_CONFIG/optimizer_machine.bat` - Machine-wide optimization script (requires admin credentials; runs at next login for selected user).
+- `RSI_PC_CONFIG/optimizer_user.bat` - Per-user optimization script (no admin required; runs at next login for selected user).
 - `RSI_PC_CONFIG/setup_ssh.ps1` - Configures the machine for remote development (OpenSSH Server).
 - `RSI_PC_CONFIG/TVHS.exe` - TeamViewer installer package.
 - `Windows Microsoft Login Bypass.txt` - Windows 11 local setup bypass notes.
@@ -82,9 +83,9 @@ When `setup.bat` runs, it prompts for these actions:
    - Generates strong random passwords for both accounts.
    - After completion, save the generated config log (`RSI_PC_CONFIG/ElementName_setup_log.txt`) in the job documentation folder.
    - Passwords are rotated during setup. If you do not save the config log or record the new admin password, you can lose access to the admin account.
-4. **Optimize a user account**
-   - Lists local users.
-   - Copies `RSI_PC_CONFIG/optimizer.bat` to the chosen user's Startup folder.
+4. **Optimize this machine**
+   - Runs `RSI_PC_CONFIG/optimizer_machine.bat` as admin in a new window and waits for it to finish. It applies machine-wide tweaks (HKLM policies, services, scheduled tasks, system-wide app removal).
+   - After it completes, copies `RSI_PC_CONFIG/optimizer_user.bat` into the Default profile's Startup folder (creating the folder if needed). Since new Windows profiles are cloned from the Default profile, it runs with no prompt at first login for every user created afterward, applying tweaks scoped to that user's own profile (HKCU, OneDrive user data).
 5. **Exit**
    - Prompts to exit setup.
    - If PC configuration was run, shows a warning popup with rotated admin password details before closing.
@@ -105,7 +106,7 @@ When `setup.bat` runs, it prompts for these actions:
 - Script blocked by policy
   - Run `setup.bat` as Administrator from an extracted folder.
 - Optimizer cannot find Startup folder
-  - Ensure the selected local user profile exists on disk.
+  - Ensure `C:\Users\Default` exists and you have permissions to create folders under it.
 
 ## Security Notes
 
