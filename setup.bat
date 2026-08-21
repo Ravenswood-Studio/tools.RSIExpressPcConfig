@@ -1,7 +1,7 @@
 @echo off
 set "Root=%~dp0"
 set "ConfigDir=%Root%RSI_PC_CONFIG"
-set "TeamViewerExe=%ConfigDir%\TVHS.exe"
+set "TeamViewerExe=%ConfigDir%\TeamViewer_Host_Setup_x64.exe"
 set "ConfigScript=%ConfigDir%\config.ps1"
 set "OptimizerScript=%ConfigDir%\optimizer.bat"
 set "DidConfig=0"
