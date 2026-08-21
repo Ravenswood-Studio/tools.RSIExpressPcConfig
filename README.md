@@ -7,6 +7,7 @@ This utility helps with new Windows PC setup using one entry point: `setup.bat`.
 - `setup.bat` - Main launcher for the setup workflow.
 - `RSI_PC_CONFIG/config.ps1` - New PC configuration script.
 - `RSI_PC_CONFIG/optimizer.bat` - User optimization script (runs at next login for selected user).
+- `RSI_PC_CONFIG/setup_ssh.ps1` - Configures the machine for remote development (OpenSSH Server).
 - `RSI_PC_CONFIG/TVHS.exe` - TeamViewer installer package.
 - `Windows Microsoft Login Bypass.txt` - Windows 11 local setup bypass notes.
 - `Teamviewer Setup Link.txt` - TeamViewer custom link.
@@ -68,7 +69,12 @@ When `setup.bat` runs, it prompts for these actions:
 
 1. **Install TeamViewer**
    - If `RSI_PC_CONFIG/TVHS.exe` exists, installer launches as admin.
-2. **Configure a new PC**
+2. **Configure remote development (setup SSH)**
+   - Launches `RSI_PC_CONFIG/setup_ssh.ps1` as admin.
+   - Installs and starts the OpenSSH Server feature, sets it to start automatically, and opens the firewall for port 22.
+   - Sets PowerShell as the default shell for SSH sessions.
+   - Prints the connection command (`ssh user@ip`) for remote access.
+3. **Configure a new PC**
    - Launches `RSI_PC_CONFIG/config.ps1` as admin.
    - Prompts for an element name and enforces:
      - Admin standard: `Admin-ElementName`
@@ -76,10 +82,10 @@ When `setup.bat` runs, it prompts for these actions:
    - Generates strong random passwords for both accounts.
    - After completion, save the generated config log (`RSI_PC_CONFIG/ElementName_setup_log.txt`) in the job documentation folder.
    - Passwords are rotated during setup. If you do not save the config log or record the new admin password, you can lose access to the admin account.
-3. **Optimize a user account**
+4. **Optimize a user account**
    - Lists local users.
    - Copies `RSI_PC_CONFIG/optimizer.bat` to the chosen user's Startup folder.
-4. **Exit**
+5. **Exit**
    - Prompts to exit setup.
    - If PC configuration was run, shows a warning popup with rotated admin password details before closing.
 
