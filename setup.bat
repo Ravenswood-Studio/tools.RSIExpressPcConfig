@@ -4,6 +4,7 @@ set "ConfigDir=%Root%RSI_PC_CONFIG"
 set "TeamViewerExe=%ConfigDir%\TeamViewer_Host_Setup_x64.exe"
 set "ConfigScript=%ConfigDir%\config.ps1"
 set "OptimizerScript=%ConfigDir%\optimizer.bat"
+set "SshScript=%ConfigDir%\setup_ssh.ps1"
 set "DidConfig=0"
 
 if not exist "%ConfigDir%" (
@@ -31,6 +32,21 @@ if /I "%installTV%"=="Y" (
     )
 ) else (
     echo Skipping Teamviewer installation.
+)
+
+set /p setupSsh="Would you like to configure the machine for remote development (setup SSH)? (Y/N): "
+if /I "%setupSsh%"=="Y" (
+    if exist "%SshScript%" (
+        echo Running SSH configuration script as administrator...
+        powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'PowerShell' -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%SshScript%""' -Verb RunAs -Wait"
+        echo SSH configuration complete.
+    ) else (
+        echo setup_ssh.ps1 was not found at:
+        echo %SshScript%
+        echo Skipping SSH configuration.
+    )
+) else (
+    echo Skipping SSH configuration.
 )
 
 set /p configPC="Would you like to configure a new PC? (Y/N): "
